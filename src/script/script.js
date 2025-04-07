@@ -18,14 +18,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //buttonSend.classList.add("minha-classe-modulo-um")
 
-    buttonSend.addEventListener("click", () => {
-        const texto = inputMsg.value.trim();
+    function enviarAlerta() {
+       const texto = inputMsg.value.trim();
 
         if (texto === "") {
             alert("Não possue mensagem ainda.");
         }else {
             alert(texto);
-        }
+        }  
+    }
+
+    buttonSend.addEventListener("click", () => {
+       enviarAlerta();
                
+    });
+
+    inputMsg.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            enviarAlerta();
+        };
     });
 });
