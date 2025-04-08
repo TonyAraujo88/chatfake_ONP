@@ -16,26 +16,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const buttonSend = document.querySelector(".cursor--pointer[src*='send']");
         console.log(buttonSend);
 
+    const listaMensagens = document.querySelector(".div--messages");
+    console.log(listaMensagens);
+
     //buttonSend.classList.add("minha-classe-modulo-um")
 
-    function enviarAlerta() {
+    function enviarAlerta(tipo) {
        const texto = inputMsg.value.trim();
 
         if (texto === "") {
             alert("Não possue mensagem ainda.");
         }else {
-            alert(texto);
+            adicionarMensagen(tipo, texto);
         }  
     }
 
+    function adicionarMensagen(tipoMensagem, texto) {
+        const mensagemElement = document.createElement("span");
+
+        mensagemElement.classList.add("message");
+
+        if (tipoMensagem === "enviada" ) {
+            mensagemElement.classList.add('you');
+        }else {
+            mensagemElement.classList.add("other");
+        }
+
+        mensagemElement.innerText = texto;
+
+        listaMensagens.appendChild(mensagemElement);
+    }
+
     buttonSend.addEventListener("click", () => {
-       enviarAlerta();
+       enviarAlerta("recebida");
                
     });
 
     inputMsg.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            enviarAlerta();
+            enviarAlerta("enviada");
         };
     });
 });
