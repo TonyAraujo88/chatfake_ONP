@@ -37,6 +37,7 @@ const respostasParaOBot = [
             alert("Não possue mensagem ainda.");
         }else {
             adicionarMensagen("enviada", texto);
+            inputMsg.value = "";
 
         //setTimeout -> Executa alguma coisa apenas uma única vez, após um intrvalo de tempo.
         //setInterval -> Executa alguma coisa em um intervalo de tempo.
@@ -54,7 +55,7 @@ const respostasParaOBot = [
     function adicionarMensagen(tipoMensagem, texto) {
         const mensagemElement = document.createElement("div");
 
-        mensagemElement.classList.add("message");
+        mensagemElement.classList.add("message", "fade-in");
 
         if (tipoMensagem === "enviada" ) {
             mensagemElement.classList.add('you');
@@ -64,6 +65,10 @@ const respostasParaOBot = [
 
         mensagemElement.innerText = texto;
         listaMensagens.appendChild(mensagemElement);
+
+        setTimeout(() => {
+            mensagemElement.classList.remove("fade-in");
+        }, 500);
     }
 
     buttonSend.addEventListener("click", () => {
