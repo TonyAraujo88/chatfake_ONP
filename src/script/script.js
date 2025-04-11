@@ -21,18 +21,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //buttonSend.classList.add("minha-classe-modulo-um")
 
-    function enviarAlerta(tipo) {
+const respostasParaOBot = [
+    "Olá, tudo bem?",
+    "Como você está?",
+    "Qual o seu nome?",
+    "Meu nome é o Novo BOT",
+    "Eu faço o curso do novo Programador",
+    "Você quer conversar comigo?"
+];
+
+    function enviarMensagem() {
        const texto = inputMsg.value.trim();
 
         if (texto === "") {
             alert("Não possue mensagem ainda.");
         }else {
-            adicionarMensagen(tipo, texto);
+            adicionarMensagen("enviada", texto);
+
+        //setTimeout -> Executa alguma coisa apenas uma única vez, após um intrvalo de tempo.
+        //setInterval -> Executa alguma coisa em um intervalo de tempo.
+        
+        setTimeout(responderMensagem, 2000);
         }  
     }
 
+    function responderMensagem() {
+        const posicao = Math.floor(Math.random() * respostasParaOBot.length);
+        const mensagemDoBot = respostasParaOBot[posicao];
+        adicionarMensagen("recebida", mensagemDoBot);
+    }
+
     function adicionarMensagen(tipoMensagem, texto) {
-        const mensagemElement = document.createElement("span");
+        const mensagemElement = document.createElement("div");
 
         mensagemElement.classList.add("message");
 
@@ -43,18 +63,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         mensagemElement.innerText = texto;
-
         listaMensagens.appendChild(mensagemElement);
     }
 
     buttonSend.addEventListener("click", () => {
-       enviarAlerta("recebida");
+       enviarMensagem();
                
     });
 
     inputMsg.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            enviarAlerta("enviada");
+            enviarMensagem();
         };
     });
 });
