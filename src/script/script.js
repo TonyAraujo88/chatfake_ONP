@@ -4,28 +4,48 @@ const listaDeContatos = [
     nome: "Joaquim",
     ultimaMensagem: "Olá, vamos programar?",
     horarioUltimaMensagem: "20:20",
-    avatar: "./src/assets/images/david--moore.png"
+    avatar: "./src/assets/images/david--moore.png",
+    conversa: [
+        { mensagem: "Oi, eu sou o novo programador!", tipo: "recebida", horario: "20:20" },
+        { mensagem: "Que legal, eu também sou", tipo: "enviada", horario: "20:20" },
+        { mensagem: "Vamos codar juntos?", tipo: "recebida", horario: "20:20" },
+    ]
 },
 {
     id: 2,
     nome: "Maria",
     ultimaMensagem: "Quer programar comigo?",
     horarioUltimaMensagem: "20:20",
-    avatar: "./src/assets/images/jessica--drew.png"
+    avatar: "./src/assets/images/jessica--drew.png",
+    conversa: [
+        { mensagem: "Oi, eu sou o novo programador!", tipo: "recebida", horario: "20:20" },
+        { mensagem: "Que legal, eu também sou", tipo: "enviada", horario: "20:20" },
+        { mensagem: "Vamos codar juntos?", tipo: "recebida", horario: "20:20" },
+    ]
 },
 {
     id: 3,
     nome: "João",
     ultimaMensagem: "Eu sou o Novo Programador",
     horarioUltimaMensagem: "20:20",
-    avatar: "./src/assets/images/greg--james.png"
+    avatar: "./src/assets/images/greg--james.png",
+    conversa: [
+        { mensagem: "Oi, eu sou o novo programador!", tipo: "recebida", horario: "20:20" },
+        { mensagem: "Que legal, eu também sou", tipo: "enviada", horario: "20:20" },
+        { mensagem: "Vamos codar juntos?", tipo: "recebida", horario: "20:20" },
+    ]
 },
 {
     id: 4,
     nome: "José",
     ultimaMensagem: "Tem Café?",
     horarioUltimaMensagem: "20:20",
-    avatar: "./src/assets/images/emily--dorson.png"
+    avatar: "./src/assets/images/emily--dorson.png",
+    conversa: [
+        { mensagem: "Oi, eu sou o novo programador!", tipo: "recebida", horario: "20:20" },
+        { mensagem: "Que legal, eu também sou", tipo: "enviada", horario: "20:20" },
+        { mensagem: "Tem café ai?", tipo: "recebida", horario: "20:20" },
+    ]
 },
 ];
 
@@ -112,6 +132,41 @@ const respostasParaOBot = [
             enviarMensagem();
         };
     });
+
+    const texto = "Oi" + texto + " como vai?";
+    
+
+    function renderizarMensagem(tipo, mensagem, horario) {
+        const divMensagem = document.createElement("div");
+        const direcao = tipo === "enviada" ? "end" : "start";
+        const styleDiv = tipo === "enviada" ? "you" : "other";
+
+        divMensagem.classList.add(
+            "flex",
+            "flex--direction--row",
+            "width--100",
+            `justify--content--${direcao}`,
+        )
+
+        divMensagem.innerHTML = `        
+        
+            <div class="flex flex--direction--column message ${styleDiv}">
+                <div class="flex--6">
+                    ${mensagem}
+                </div>
+
+                <div class="flex--1 flex align--items--center flex--direction--row justify--content--end infos--message font--size--12">
+                    <img src="./src/assets/icons/heart.svg"/>
+                    <div>${horario}</div>
+                    <img src="./src/assets/icons/viewed.svg"/>
+
+                </div>
+            </div>
+        
+                                
+        `;
+        return divMensagem;
+    }
 
     function carregarContatos() {        
         const divContatosElement = document.querySelector(".div--contacts");
