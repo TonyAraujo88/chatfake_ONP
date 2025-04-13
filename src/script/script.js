@@ -87,7 +87,8 @@ const respostasParaOBot = [
         if (texto === "") {
             alert("Não possue mensagem ainda.");
         }else {
-            adicionarMensagen("enviada", texto);
+            const mensagemRenderizada = renderizarMensagem("enviada", texto, "21:00");
+            listaMensagens.appendChild(mensagemRenderizada);
             inputMsg.value = "";
 
         //setTimeout -> Executa alguma coisa apenas uma única vez, após um intrvalo de tempo.
@@ -100,26 +101,8 @@ const respostasParaOBot = [
     function responderMensagem() {
         const posicao = Math.floor(Math.random() * respostasParaOBot.length);
         const mensagemDoBot = respostasParaOBot[posicao];
-        adicionarMensagen("recebida", mensagemDoBot);
-    }
-
-    function adicionarMensagen(tipoMensagem, texto) {
-        const mensagemElement = document.createElement("div");
-
-        mensagemElement.classList.add("message", "fade-in");
-
-        if (tipoMensagem === "enviada" ) {
-            mensagemElement.classList.add('you');
-        }else {
-            mensagemElement.classList.add("other");
-        }
-
-        mensagemElement.innerText = texto;
-        listaMensagens.appendChild(mensagemElement);
-
-        setTimeout(() => {
-            mensagemElement.classList.remove("fade-in");
-        }, 500);
+        const mensagemRenderizada = renderizarMensagem("recebida", mensagemDoBot, "21:00");
+        listaMensagens.appendChild(mensagemRenderizada);
     }
 
     buttonSend.addEventListener("click", () => {
@@ -133,9 +116,6 @@ const respostasParaOBot = [
         };
     });
 
-    const texto = "Oi" + texto + " como vai?";
-    
-
     function renderizarMensagem(tipo, mensagem, horario) {
         const divMensagem = document.createElement("div");
         const direcao = tipo === "enviada" ? "end" : "start";
@@ -146,24 +126,21 @@ const respostasParaOBot = [
             "flex--direction--row",
             "width--100",
             `justify--content--${direcao}`,
-        )
+            "fade-in"
+        );
 
-        divMensagem.innerHTML = `        
-        
+        divMensagem.innerHTML = `       
             <div class="flex flex--direction--column message ${styleDiv}">
                 <div class="flex--6">
                     ${mensagem}
                 </div>
 
-                <div class="flex--1 flex align--items--center flex--direction--row justify--content--end infos--message font--size--12">
-                    <img src="./src/assets/icons/heart.svg"/>
+                <div class="flex--1 flex align--items--center flex--direction--row justify--content--end infos--message font--size--12">                    
                     <div>${horario}</div>
                     <img src="./src/assets/icons/viewed.svg"/>
 
                 </div>
-            </div>
-        
-                                
+            </div>            
         `;
         return divMensagem;
     }
@@ -174,7 +151,7 @@ const respostasParaOBot = [
         listaDeContatos.forEach((contato) => {
             console.log(contato);
             const divParentElement = document.createElement("div");
-           divParentElement.classList.add("flex", "area--contact", "fade-in");
+            divParentElement.classList.add("flex", "area--contact", "fade-in");
 
             divParentElement.innerHTML = `
                     <div class="flex justify--content--center align--items--center flex--1">
@@ -193,11 +170,16 @@ const respostasParaOBot = [
                         <div class="hour--last--message">${contato.horarioUltimaMensagem}</div>
                         
                     </div>                
-            `;            
+            `; 
+            
+            divParentElement.addEventListerner("click", () => {
+
+            });
+            
             divContatosElement.appendChild(divParentElement);
         }); 
     }
      setTimeout(() => {
-            carregarContatos();
+        carregarContatos();
     }, 2500);
 });
