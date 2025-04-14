@@ -73,7 +73,7 @@ const respostasParaOBot = [
         //setTimeout -> Executa alguma coisa apenas uma única vez, após um intrvalo de tempo.
         //setInterval -> Executa alguma coisa em um intervalo de tempo.
         
-        setTimeout(responderMensagem, 2000);
+            setTimeout(responderMensagem, 2000);
         }  
     }
 
@@ -116,13 +116,13 @@ const respostasParaOBot = [
     function carregarContatos() {        
         const divContatosElement = document.querySelector(".div--contacts");
          
-        listaDeContatos.forEach((contato, index) => {
+        listaDeContatos.forEach((contato) => {
             console.log(contato);
             const divParentElement = document.createElement("div");
-           divParentElement.classList.add("flex", "area--contact", "fade-in");
+            divParentElement.classList.add("flex", "area--contact", "fade-in");
 
             divParentElement.innerHTML = `
-                    <div class="flex justify--content--center align--items--center flex--1">
+                <div class="flex justify--content--center align--items--center flex--1">
                         <img class="avatar--left--bar" src="${contato.avatar}" />                        
                     </div>
 
@@ -136,13 +136,12 @@ const respostasParaOBot = [
 
                     <div class="flex flex--direction--column justify--content--center align--items--end flex--1 div--last--messages--info">
                         <div class="hour--last--message">${contato.horarioUltimaMensagem}</div>
-                        
-                    </div>                
-            `;            
+                </div>                
+            `; 
             divContatosElement.appendChild(divParentElement);
         }); 
     }
      setTimeout(() => {
-            carregarContatos();
+        carregarContatos();
     }, 2500);
 });
