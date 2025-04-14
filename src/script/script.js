@@ -4,28 +4,88 @@ const listaDeContatos = [
     nome: "Joaquim",
     ultimaMensagem: "Olá, vamos programar?",
     horarioUltimaMensagem: "20:20",
-    avatar: "./src/assets/images/david--moore.png"
+    avatar: "./src/assets/images/david--moore.png",
+    conversas: [
+        {
+            mensagem: "Oi, eu sou o novo rogramador!",
+            tipo: "recebida",
+            horario: "20:20"},
+        {
+            mensagem: "Que legal, eu tembém sou",
+            tipo: "enviada",
+            horario: "20:20"},
+        {
+            mensagem: "Vamos codar juntos?",
+            tipo: "recebida",
+            horario: "20:20"
+        },
+    ]
 },
 {
     id: 2,
     nome: "Maria",
     ultimaMensagem: "Quer programar comigo?",
     horarioUltimaMensagem: "20:20",
-    avatar: "./src/assets/images/jessica--drew.png"
+    avatar: "./src/assets/images/jessica--drew.png",
+    conversas: [
+        {
+            mensagem: "Oi, eu sou o novo rogramador!",
+            tipo: "recebida",
+            horario: "20:20"},
+        {
+            mensagem: "Que legal, eu tembém sou",
+            tipo: "enviada",
+            horario: "20:20"},
+        {
+            mensagem: "Vamos codar juntos?",
+            tipo: "recebida",
+            horario: "20:20"
+        },
+    ]
 },
 {
     id: 3,
     nome: "João",
     ultimaMensagem: "Eu sou o Novo Programador",
     horarioUltimaMensagem: "20:20",
-    avatar: "./src/assets/images/greg--james.png"
+    avatar: "./src/assets/images/greg--james.png",
+    conversas: [
+        {
+            mensagem: "Oi, eu sou o novo rogramador!",
+            tipo: "recebida",
+            horario: "20:20"},
+        {
+            mensagem: "Que legal, eu tembém sou",
+            tipo: "enviada",
+            horario: "20:20"},
+        {
+            mensagem: "Vamos codar juntos?",
+            tipo: "recebida",
+            horario: "20:20"
+        },
+    ]
 },
 {
     id: 4,
     nome: "José",
     ultimaMensagem: "Tem Café?",
     horarioUltimaMensagem: "20:20",
-    avatar: "./src/assets/images/emily--dorson.png"
+    avatar: "./src/assets/images/emily--dorson.png",
+    conversas: [
+        {
+            mensagem: "Oi, eu sou o novo rogramador!",
+            tipo: "recebida",
+            horario: "20:20"},
+        {
+            mensagem: "Que legal, eu tembém sou",
+            tipo: "enviada",
+            horario: "20:20"},
+        {
+            mensagem: "Tem café ai?",
+            tipo: "recebida",
+            horario: "20:20"
+        },
+    ]
 },
 ];
 
@@ -67,7 +127,8 @@ const respostasParaOBot = [
         if (texto === "") {
             alert("Não possue mensagem ainda.");
         }else {
-            adicionarMensagen("enviada", texto);
+            const mensagemRenderizada = renderizarMensagem("enviada", texto, "21:00");
+            listaMensagens.appendChild(mensagemRenderizada);
             inputMsg.value = "";
 
         //setTimeout -> Executa alguma coisa apenas uma única vez, após um intrvalo de tempo.
@@ -80,26 +141,8 @@ const respostasParaOBot = [
     function responderMensagem() {
         const posicao = Math.floor(Math.random() * respostasParaOBot.length);
         const mensagemDoBot = respostasParaOBot[posicao];
-        adicionarMensagen("recebida", mensagemDoBot);
-    }
-
-    function adicionarMensagen(tipoMensagem, texto) {
-        const mensagemElement = document.createElement("div");
-
-        mensagemElement.classList.add("message", "fade-in");
-
-        if (tipoMensagem === "enviada" ) {
-            mensagemElement.classList.add('you');
-        }else {
-            mensagemElement.classList.add("other");
-        }
-
-        mensagemElement.innerText = texto;
-        listaMensagens.appendChild(mensagemElement);
-
-        setTimeout(() => {
-            mensagemElement.classList.remove("fade-in");
-        }, 500);
+        const mensagemRenderizada = renderizarMensagem("recebida", mensagemDoBot, "21:10");
+        listaMensagens.appendChild(mensagemRenderizada);
     }
 
     buttonSend.addEventListener("click", () => {
@@ -112,11 +155,56 @@ const respostasParaOBot = [
             enviarMensagem();
         };
     });
+     
+    function renderizarMensagem(tipo, mensagem, horario) {
+        const divMensagem = document.createElement("div");
+        const direcao = tipo === "enviada" ? "end" : "start";
+        const stylesDiv = tipo === "enviada" ? "you" : "other";
+
+        divMensagem.classList.add(
+            "flex",
+            "flex--direction--row",
+            "width--100",
+            `justify--content--${direcao}`,
+            "fade-in",
+        );
+
+        divMensagem.innerHTML = `
+        <div class="flex flex--direction--row justify--content--${direcao} width--100">
+            <div class="flex flex--direction--column message ${stylesDiv}">
+                <div class="flex--6">
+                   ${mensagem}
+                </div>
+                <div class="flex--1 flex align--items--center flex--direction--row justify--content--end infos--message font--size--12">
+                    <div>${horario}</div>
+                    <img src="./src/assets/icons/viewed.svg"/>
+
+                </div>
+            </div>
+        </div>             
+        `;
+
+        return divMensagem;
+    }
+
+    function carregarMensagemContato(index) {
+        const contato = listaDeContatos[index];
+        listaMensagens.innerHTML = "";
+
+        contato.conversas.forEach((conversa) => {
+            const mensagemRenderizada = renderizarMensagem(
+                conversa.tipo,
+                conversa.mensagem,
+                conversa.horario
+            );
+            listaMensagens.appendChild(mensagemRenderizada);
+        });
+    };
 
     function carregarContatos() {        
         const divContatosElement = document.querySelector(".div--contacts");
          
-        listaDeContatos.forEach((contato) => {
+        listaDeContatos.forEach((contato, index) => {
             console.log(contato);
             const divParentElement = document.createElement("div");
             divParentElement.classList.add("flex", "area--contact", "fade-in");
@@ -137,7 +225,12 @@ const respostasParaOBot = [
                     <div class="flex flex--direction--column justify--content--center align--items--end flex--1 div--last--messages--info">
                         <div class="hour--last--message">${contato.horarioUltimaMensagem}</div>
                 </div>                
-            `; 
+            `;
+
+            divParentElement.addEventListener("click", () => {
+                carregarMensagemContato(index);
+            });
+
             divContatosElement.appendChild(divParentElement);
         }); 
     }
