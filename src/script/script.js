@@ -110,8 +110,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const listaMensagens = document.querySelector(".div--messages");
     console.log(listaMensagens);
 
-    const inputBuscaContato = document.querySelector(".div--search input[typ='search']");
+    const inputBuscaContato = document.querySelector(".div--search input[type='search']");
         console.log(inputBuscaContato);
+
+        inputBuscaContato.addEventListener("input", () => {
+            const termoDeBusca = inputBuscaContato.value;
+            console.log(`O termo buscado foi: ${termoDeBusca}`);
+            carregarContatos(termoDeBusca);
+         });
+
+   
     //buttonSend.classList.add("minha-classe-modulo-um")
 
 const respostasParaOBot = [
@@ -203,20 +211,26 @@ const respostasParaOBot = [
         });
     };
 
-    function carregarContatos() {        
+    function carregarContatos(filtro = "") {        
         const divContatosElement = document.querySelector(".div--contacts");
         divContatosElement.innerHTML = "";
 
         //toLowCase() -> transforma uma string para minúscula
         //toUpperCase() -> transforma uma string para maiúscula
 
+        // filter, find, reduce, map
+
         const contatosFiltrados = listaDeContatos.filter((contato) => 
             contato.nome.toLowerCase().includes(filtro.toLowerCase())
         );
 
-        
+        if (contatosFiltrados.length === 0 ){
+            divContatosElement.innerHTML =
+            "<div><span>Contato não encontrado<span/><div/>";
+            return;
+        }        
          
-        listaDeContatos.forEach((contato, index) => {
+        contatosFiltrados.forEach((contato, index) => {
             console.log(contato);
             const divParentElement = document.createElement("div");
             divParentElement.classList.add("flex", "area--contact", "fade-in");
@@ -225,7 +239,6 @@ const respostasParaOBot = [
                 <div class="flex justify--content--center align--items--center flex--1">
                         <img class="avatar--left--bar" src="${contato.avatar}" />                        
                     </div>
-
                     <div class="flex flex--direction--column justify--content--center flex--3">
                         <div class="flex align--items--center infos--contact">
                             <div class="font--family font--weight--bold">${contato.nome}</div>
