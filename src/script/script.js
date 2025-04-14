@@ -77,11 +77,11 @@ const listaDeContatos = [
             tipo: "recebida",
             horario: "20:20"},
         {
-            mensagem: "Que legal, eu tembém sou",
+            mensagem: "Poxa acho que vou fazer um café!",
             tipo: "enviada",
             horario: "20:20"},
         {
-            mensagem: "Tem café ai?",
+            mensagem: "Eu quero café também!",
             tipo: "recebida",
             horario: "20:20"
         },
@@ -110,6 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const listaMensagens = document.querySelector(".div--messages");
     console.log(listaMensagens);
 
+    const inputBuscaContato = document.querySelector(".div--search input[typ='search']");
+        console.log(inputBuscaContato);
     //buttonSend.classList.add("minha-classe-modulo-um")
 
 const respostasParaOBot = [
@@ -203,6 +205,16 @@ const respostasParaOBot = [
 
     function carregarContatos() {        
         const divContatosElement = document.querySelector(".div--contacts");
+        divContatosElement.innerHTML = "";
+
+        //toLowCase() -> transforma uma string para minúscula
+        //toUpperCase() -> transforma uma string para maiúscula
+
+        const contatosFiltrados = listaDeContatos.filter((contato) => 
+            contato.nome.toLowerCase().includes(filtro.toLowerCase())
+        );
+
+        
          
         listaDeContatos.forEach((contato, index) => {
             console.log(contato);
