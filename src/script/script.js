@@ -116,7 +116,7 @@ const respostasParaOBot = [
     function carregarContatos() {        
         const divContatosElement = document.querySelector(".div--contacts");
          
-        listaDeContatos.forEach((contato) => {
+        listaDeContatos.forEach((contato, index) => {
             console.log(contato);
             const divParentElement = document.createElement("div");
            divParentElement.classList.add("flex", "area--contact", "fade-in");
