@@ -113,6 +113,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputBuscaContato = document.querySelector(".div--search input[type='search']");
         console.log(inputBuscaContato);
 
+    const inputBuscaMensagem = document.getElementById("search--message");
+    console.log(inputBuscaMensagem);
+
+    inputBuscaMensagem.addEventListener("input", () => {
+        const termoDeBusca = inputBuscaMensagem.value;
+        console.log(`O termo busca foi: `)
+    })
+
         inputBuscaContato.addEventListener("input", () => {
             const termoDeBusca = inputBuscaContato.value;
             console.log(`O termo buscado foi: ${termoDeBusca}`);
