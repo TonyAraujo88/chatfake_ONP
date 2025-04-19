@@ -118,13 +118,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     inputBuscaMensagem.addEventListener("input", () => {
         const termoDeBusca = inputBuscaMensagem.value;
-        console.log(`O termo busca foi: `)
+        console.log(`O termo buscado foi: ${termoDeBusca}`);
+        buscarMensagem(termoDeBusca);
     })
 
         inputBuscaContato.addEventListener("input", () => {
             const termoDeBusca = inputBuscaContato.value;
             console.log(`O termo buscado foi: ${termoDeBusca}`);
             carregarContatos(termoDeBusca);
+            buscarMensagem(termoDeBusca);
          });
 
    
@@ -138,6 +140,24 @@ const respostasParaOBot = [
     "Eu faço o curso do novo Programador",
     "Você quer conversar comigo?"
 ];
+
+    function buscarMensagem(termo) {
+        let encontrouMensagem = false;
+        listaMensagens.forEach((mensagem) => {
+            const textoOriginal = mensagem.innerText;
+            const textoNormalizado = textoOriginal.toLowerCase();
+            const termoNormalizado = termo.toLowerCase();
+
+            if (textoNormalizado.includes(termoNormalizado)) {
+                encontrouMensagem = true;
+
+                mensagem.style.display = "block";
+            }else {
+                mensagem.style.display = "none";
+           
+            } 
+     });
+    }
 
     function enviarMensagem() {
        const texto = inputMsg.value.trim();
