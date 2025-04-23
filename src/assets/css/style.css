@@ -193,6 +193,11 @@
     width: 100%;
 }
 
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+}
+
 .text--field {
     width: 100%;
     border: 0;

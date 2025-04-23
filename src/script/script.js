@@ -120,17 +120,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const termoDeBusca = inputBuscaMensagem.value;
         console.log(`O termo buscado foi: ${termoDeBusca}`);
         buscarMensagem(termoDeBusca);
-    })
+    });
 
-        inputBuscaContato.addEventListener("input", () => {
-            const termoDeBusca = inputBuscaContato.value;
-            console.log(`O termo buscado foi: ${termoDeBusca}`);
-            carregarContatos(termoDeBusca);
-            buscarMensagem(termoDeBusca);
-         });
-
-   
-    //buttonSend.classList.add("minha-classe-modulo-um")
+    inputBuscaContato.addEventListener("input", () => {
+        const termoDeBusca = inputBuscaContato.value;
+        console.log(`O termo buscado foi ${termoDeBusca}`);
+        carregarContatos(termoDeBusca);
+    });
 
 const respostasParaOBot = [
     "Olá, tudo bem?",
@@ -142,8 +138,11 @@ const respostasParaOBot = [
 ];
 
     function buscarMensagem(termo) {
-        let encontrouMensagem = false;
-        listaMensagens.forEach((mensagem) => {
+        let encontrouMensagem = false;        
+        const mensagemElement = document.querySelectorAll(".message");
+        //console.log(mensagemElement);
+
+        mensagemElement.forEach((mensagem) => {
             const textoOriginal = mensagem.innerText;
             const textoNormalizado = textoOriginal.toLowerCase();
             const termoNormalizado = termo.toLowerCase();
@@ -151,12 +150,29 @@ const respostasParaOBot = [
             if (textoNormalizado.includes(termoNormalizado)) {
                 encontrouMensagem = true;
 
-                mensagem.style.display = "block";
+                const textoDestacado = textoOriginal.replace(
+                    new RegExp(`(${termo})`, "gi"),
+                    `<span class="highlight">$1</span>`
+                );
+
+                console.log(textoDestacado);
+
+                mensagem.innerHTML = textoDestacado;                 
+                mensagem.style.display = "block"; //Exibir a mensagem
             }else {
-                mensagem.style.display = "none";
-           
-            } 
-     });
+                mensagem.style.display = "none"; //Ocultar a mensagem
+            }
+
+        });
+
+        if (!encontrouMensagem && termo !== "") {
+            listaMensagens.innerHTML = "<div>Não houve resultados</div>";
+        } else if (termo === "") {
+            mensagemElement.forEach((mensagem) => {
+                mensagem.style.display = "block";
+                mensagem.innerHTML = mensagem.innerText;
+            }) 
+        }
     }
 
     function enviarMensagem() {
