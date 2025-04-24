@@ -147,7 +147,7 @@ const respostasParaOBot = [
 
     function carregarContatos() {        
         const divContatosElement = document.querySelector(".div--contacts");
-         
+       
         listaDeContatos.forEach((contato) => {
             console.log(contato);
             const divParentElement = document.createElement("div");
@@ -171,13 +171,8 @@ const respostasParaOBot = [
                         
                     </div>                
             `; 
-            
-            divParentElement.addEventListerner("click", () => {
-
-            });
-            
             divContatosElement.appendChild(divParentElement);
-        }); 
+        });
     }
      setTimeout(() => {
         carregarContatos();
