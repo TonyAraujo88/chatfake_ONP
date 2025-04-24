@@ -128,6 +128,10 @@ document.addEventListener("DOMContentLoaded", () => {
         carregarContatos(termoDeBusca);
     });
 
+    listaMensagens.addEventListener("click", (evento) => {
+        if (evento.target.classList.contains("") )
+    });
+
 const respostasParaOBot = [
     "Olá, tudo bem?",
     "Como você está?",
@@ -230,6 +234,10 @@ const respostasParaOBot = [
                    ${mensagem}
                 </div>
                 <div class="flex--1 flex align--items--center flex--direction--row justify--content--end infos--message font--size--12">
+                    <div class="emojis--rection">&#128077;</div>
+                    <div class="emojis--rection">&#128513;</div>
+                    <div class="emojis--rection">&#128514;</div>
+                    <div class="emojis--rection">&#128526;</div>
                     <div>${horario}</div>
                     <img src="./src/assets/icons/viewed.svg"/>
 
