@@ -6,9 +6,19 @@ const listaDeContatos = [
     horarioUltimaMensagem: "20:20",
     avatar: "./src/assets/images/david--moore.png",
     conversa: [
-        { mensagem: "Oi, eu sou o novo programador!", tipo: "recebida", horario: "20:20" },
-        { mensagem: "Que legal, eu também sou", tipo: "enviada", horario: "20:20" },
-        { mensagem: "Vamos codar juntos?", tipo: "recebida", horario: "20:20" },
+        {
+            mensagem: "Oi, eu sou o novo programador!",
+            tipo: "recebida",
+            horario: "20:20" },
+        {
+            mensagem: "Que legal, eu também sou",
+            tipo: "enviada",
+            horario: "20:20" },
+        {
+            mensagem: "Vamos codar juntos?",
+            tipo: "recebida",
+            horario: "20:20"
+        },
     ]
 },
 {
@@ -18,9 +28,21 @@ const listaDeContatos = [
     horarioUltimaMensagem: "20:20",
     avatar: "./src/assets/images/jessica--drew.png",
     conversa: [
-        { mensagem: "Oi, eu sou o novo programador!", tipo: "recebida", horario: "20:20" },
-        { mensagem: "Que legal, eu também sou", tipo: "enviada", horario: "20:20" },
-        { mensagem: "Vamos codar juntos?", tipo: "recebida", horario: "20:20" },
+        {
+            mensagem: "Oi, eu sou o novo programador!",
+            tipo: "recebida",
+            horario: "20:20"
+        },
+        {
+            mensagem: "Que legal, eu também sou",
+            tipo: "enviada",
+            horario: "20:20"
+        },
+        {
+            mensagem: "Vamos codar juntos?",
+            tipo: "recebida",
+            horario: "20:20"
+        },
     ]
 },
 {
@@ -30,9 +52,21 @@ const listaDeContatos = [
     horarioUltimaMensagem: "20:20",
     avatar: "./src/assets/images/greg--james.png",
     conversa: [
-        { mensagem: "Oi, eu sou o novo programador!", tipo: "recebida", horario: "20:20" },
-        { mensagem: "Que legal, eu também sou", tipo: "enviada", horario: "20:20" },
-        { mensagem: "Vamos codar juntos?", tipo: "recebida", horario: "20:20" },
+        {
+            mensagem: "Oi, eu sou o novo programador!",
+            tipo: "recebida",
+            horario: "20:20"
+        },
+        {
+            mensagem: "Que legal, eu também sou",
+            tipo: "enviada",
+            horario: "20:20"
+        },
+        {
+            mensagem: "Vamos codar juntos?",
+            tipo: "recebida",
+            horario: "20:20"
+        },
     ]
 },
 {
@@ -42,9 +76,21 @@ const listaDeContatos = [
     horarioUltimaMensagem: "20:20",
     avatar: "./src/assets/images/emily--dorson.png",
     conversa: [
-        { mensagem: "Oi, eu sou o novo programador!", tipo: "recebida", horario: "20:20" },
-        { mensagem: "Que legal, eu também sou", tipo: "enviada", horario: "20:20" },
-        { mensagem: "Tem café ai?", tipo: "recebida", horario: "20:20" },
+        {
+            mensagem: "Oi, eu sou o novo programador!",
+            tipo: "recebida",
+            horario: "20:20"
+        },
+        {
+            mensagem: "Que legal, eu também sou",
+            tipo: "enviada",
+            horario: "20:20"
+        },
+        {
+            mensagem: "Tem café ai?",
+            tipo: "recebida",
+            horario: "20:20"
+        },
     ]
 },
 ];
