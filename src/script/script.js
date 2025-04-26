@@ -118,6 +118,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const inputBuscaContato = document.querySelector(".div--search input[type='search']");
     console.log(inputBuscaContato);
+
+    inputBuscaContato.addEventListener("input", () => {
+        const termoDeBusca = inputBuscaContato.value;
+        console.log(`O termo bucasdo foi: ${termoDeBusca}`);
+        carregarContatos(termoDeBusca);
+    });
+
     //buttonSend.classList.add("minha-classe-modulo-um")
 
 const respostasParaOBot = [
@@ -207,15 +214,24 @@ const respostasParaOBot = [
         });
     }
 
-    function carregarContatos(filtro = '') {   
+    function carregarContatos(filtro = "") {   
         const divContatosElement = document.querySelector(".div--contacts");
        divContatosElement.innerHTML = "";
 
-       const contatosFiltrados = listaDeContatos.filter((contato) => {
-        contato.nome.toLowerCase
-       });
+    // toLowerCase() -> transforma uma string para minúscula
+    // toUpperCase() -> transforma uma string para maiúscula
+    // filter, find, reduce, map
 
-        listaDeContatos.forEach((contato, index) => {
+       const contatosFiltrados = listaDeContatos.filter((contato) => 
+        contato.nome.toLowerCase().includes(filtro.toLowerCase())
+       );
+
+       if (contatosFiltrados.length === 0 ){
+        divContatosElement.innerHTML = "<div><span>Contato não encontrado</span></div>";
+        return;
+       }
+
+        contatosFiltrados.forEach((contato, index) => {
             console.log(contato);
             const divParentElement = document.createElement("div");
             divParentElement.classList.add("flex", "area--contact", "fade-in");
