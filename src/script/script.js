@@ -5,7 +5,7 @@ const listaDeContatos = [
     ultimaMensagem: "Olá, vamos programar?",
     horarioUltimaMensagem: "20:20",
     avatar: "./src/assets/images/david--moore.png",
-    conversa: [
+    conversas: [
         {
             mensagem: "Oi, eu sou o novo programador!",
             tipo: "recebida",
@@ -27,7 +27,7 @@ const listaDeContatos = [
     ultimaMensagem: "Quer programar comigo?",
     horarioUltimaMensagem: "20:20",
     avatar: "./src/assets/images/jessica--drew.png",
-    conversa: [
+    conversas: [
         {
             mensagem: "Oi, eu sou o novo programador!",
             tipo: "recebida",
@@ -51,7 +51,7 @@ const listaDeContatos = [
     ultimaMensagem: "Eu sou o Novo Programador",
     horarioUltimaMensagem: "20:20",
     avatar: "./src/assets/images/greg--james.png",
-    conversa: [
+    conversas: [
         {
             mensagem: "Oi, eu sou o novo programador!",
             tipo: "recebida",
@@ -72,22 +72,22 @@ const listaDeContatos = [
 {
     id: 4,
     nome: "José",
-    ultimaMensagem: "Tem Café?",
+    ultimaMensagem: "Eu quero café também!?",
     horarioUltimaMensagem: "20:20",
     avatar: "./src/assets/images/emily--dorson.png",
-    conversa: [
+    conversas: [
         {
             mensagem: "Oi, eu sou o novo programador!",
             tipo: "recebida",
             horario: "20:20"
         },
         {
-            mensagem: "Que legal, eu também sou",
+            mensagem: "Poxa acho que vou fazer um café!",
             tipo: "enviada",
             horario: "20:20"
         },
         {
-            mensagem: "Tem café ai?",
+            mensagem: "Eu quero café também!",
             tipo: "recebida",
             horario: "20:20"
         },
@@ -116,6 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const listaMensagens = document.querySelector(".div--messages");
     console.log(listaMensagens);
 
+    const inputBuscaContato = document.querySelector(".div--search input[type='search']");
+    console.log(inputBuscaContato);
     //buttonSend.classList.add("minha-classe-modulo-um")
 
 const respostasParaOBot = [
@@ -147,7 +149,7 @@ const respostasParaOBot = [
     function responderMensagem() {
         const posicao = Math.floor(Math.random() * respostasParaOBot.length);
         const mensagemDoBot = respostasParaOBot[posicao];
-        const mensagemRenderizada = renderizarMensagem("recebida", mensagemDoBot, "21:00");
+        const mensagemRenderizada = renderizarMensagem("recebida", mensagemDoBot, "21:10");
         listaMensagens.appendChild(mensagemRenderizada);
     }
 
@@ -191,10 +193,24 @@ const respostasParaOBot = [
         return divMensagem;
     }
 
+    function carregarMensagemContato(index) {
+        const contato = listaDeContatos[index];
+        listaMensagens.innerHTML = "";
+
+        contato.conversas.forEach((conversa) => {
+            const mensagemRenderizada = renderizarMensagem(
+                conversa.tipo,
+                conversa.mensagem,
+                conversa.horario,
+            );
+            listaMensagens.appendChild(mensagemRenderizada);
+        });
+    }
+
     function carregarContatos() {        
         const divContatosElement = document.querySelector(".div--contacts");
        
-        listaDeContatos.forEach((contato) => {
+        listaDeContatos.forEach((contato, index) => {
             console.log(contato);
             const divParentElement = document.createElement("div");
             divParentElement.classList.add("flex", "area--contact", "fade-in");
@@ -217,6 +233,10 @@ const respostasParaOBot = [
                         
                     </div>                
             `; 
+            divParentElement.addEventListener("click", () => {
+                carregarMensagemContato(index);
+            });
+
             divContatosElement.appendChild(divParentElement);
         });
     }
