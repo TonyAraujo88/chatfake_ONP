@@ -207,9 +207,14 @@ const respostasParaOBot = [
         });
     }
 
-    function carregarContatos() {        
+    function carregarContatos(filtro = '') {   
         const divContatosElement = document.querySelector(".div--contacts");
-       
+       divContatosElement.innerHTML = "";
+
+       const contatosFiltrados = listaDeContatos.filter((contato) => {
+        contato.nome.toLowerCase
+       });
+
         listaDeContatos.forEach((contato, index) => {
             console.log(contato);
             const divParentElement = document.createElement("div");
