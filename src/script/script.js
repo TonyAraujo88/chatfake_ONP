@@ -116,25 +116,8 @@ const buttonSend = document.querySelector(".cursor--pointer[src*='send']");
 const listaMensagens = document.querySelector(".div--messages");
 console.log(listaMensagens);
 
-const inputBuscaContato = document.querySelector(
-    ".div--search input[type='search']");
-console.log(inputBuscaContato);
-
-const inputBuscaMensagem = document.getElementById("search--message");
-console.log(inputBuscaMensagem);
-
-inputBuscaMensagem.addEventListener("input", () => {
-    const termoDeBusca = inputBuscaMensagem.value;
-    console.log(`O termo buscado foi: ${termoDeBusca}`);
-    buscarMensagem(termoDeBusca);
-});
-
-inputBuscaContato.addEventListener("input", () => {
-   const termoDeBusca = inputBuscaContato.value;
-   console.log(`O termo buscado foi: ${termoDeBusca}`);
-   carregarContatos(termoDeBusca); 
-});
-
+    const inputBuscaContato = document.querySelector(".div--search input[type='search']");
+    console.log(inputBuscaContato);
     //buttonSend.classList.add("minha-classe-modulo-um")
 
 const respostasParaOBot = [
@@ -262,25 +245,15 @@ function carregarMensagemContato(index) {
     });
 }
 
-function carregarContatos(filtro = "") {   
-    const divContatosElement = document.querySelector(".div--contacts");
-    divContatosElement.innerHTML = "";
-        
-    // toLowerCase() -> transforma uma string para minuscula
-    // toUpperCase() -> transforma uma string para maiuscula
+    function carregarContatos(filtro = '') {   
+        const divContatosElement = document.querySelector(".div--contacts");
+       divContatosElement.innerHTML = "";
 
-    //filter, find, reduce, map
+       const contatosFiltrados = listaDeContatos.filter((contato) => {
+        contato.nome.toLowerCase
+       });
 
-    const contatosFiltrados = listaDeContatos.filter((contato) => 
-    contato.nome.toLowerCase().includes(filtro.toLowerCase())
-    );
-
-    if (contatosFiltrados.length === 0){
-    divContatosElement.innerHTML = "<div><span>Contato não encontrado</span></div>";
-    return;
-    }
-
-        contatosFiltrados.forEach((contato, index) => {
+        listaDeContatos.forEach((contato, index) => {
             console.log(contato);
             const divParentElement = document.createElement("div");
             divParentElement.classList.add("flex", "area--contact", "fade-in");
