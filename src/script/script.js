@@ -239,6 +239,10 @@ function renderizarMensagem(tipo, mensagem, horario) {
             </div>
 
             <div class="flex--1 flex align--items--center flex--direction--row justify--content--end infos--message font--size--12">                    
+                <div>&#128512;</div>
+                <div>&#128514;</div>
+                <div>&#128526;</div>
+                <div>&#128527;</div>
                 <div>${horario}</div>
                 <img src="./src/assets/icons/viewed.svg"/>
 
